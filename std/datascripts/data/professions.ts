@@ -236,3 +236,21 @@ export const enchantmentDisplayData: Record<
     enchantItemSubclass: 189939,
   },
 };
+
+/**
+ *
+ * @param profession Name of the Profession
+ * @param quality Quality level of the recipe
+ * @returns object with recipePrefix, subclass, and displayId
+ */
+export function getProfessionDisplayData(
+  profession: RecipeProfessions,
+  quality: ItemQuality
+) {
+  const displayData = professionDisplayData[profession];
+
+  return {
+    ...displayData,
+    displayId: displayData.displayId ?? recipeQualityDisplays[quality],
+  };
+}

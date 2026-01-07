@@ -10,7 +10,7 @@ import {
   resolveProfession,
 } from "wow/wotlk/std/Profession/ProfessionType";
 import { Spell } from "wow/wotlk/std/Spell/Spell";
-import { enchantmentDisplayData, EnchantmentSlots, professionDisplayData, professionToolDisplayData, ProfessionToolTypes, RecipeProfessions, recipeQualityDisplays } from "./professions";
+import { enchantmentDisplayData, EnchantmentSlots, getProfessionDisplayData, professionDisplayData, professionToolDisplayData, ProfessionToolTypes, RecipeProfessions, recipeQualityDisplays } from "../data/professions";
 
 export class Items {
   /**
@@ -40,7 +40,7 @@ export class Items {
     let spell: Spell;
     recipe instanceof Spell ? (spell = recipe) : (spell = recipe.AsSpell());
 
-    const { recipePrefix, subclass, displayId } = this.getProfessionDisplayData(
+    const { recipePrefix, subclass, displayId } = getProfessionDisplayData(
       profession,
       quality
     );
@@ -61,9 +61,8 @@ export class Items {
       .Description.enGB.set(
         spell.Effects.get(0).Type.ENCHANT_ITEM.is()
           ? `Teaches you how to ${desc}`
-          : `Teaches you how to make ${
-              AnInsteadOfA ? "an" : itemName.startsWith("Elixir") ? "an" : "a"
-            } ${itemName}.`
+          : `Teaches you how to make ${AnInsteadOfA ? "an" : itemName.startsWith("Elixir") ? "an" : "a"
+          } ${itemName}.`
       )
       .Bonding.set(bonding ? bonding : 0)
       .Class.set(9, subclass)
@@ -85,24 +84,6 @@ export class Items {
     ITEM.Requirements.Skill.Rank.set(reqSkillLevel);
 
     return ITEM;
-  }
-
-  /**
-   *
-   * @param profession Name of the Profession
-   * @param quality Quality level of the recipe
-   * @returns object with recipePrefix, subclass, and displayId
-   */
-  private getProfessionDisplayData(
-    profession: RecipeProfessions,
-    quality: ItemQuality
-  ) {
-    const displayData = professionDisplayData[profession];
-
-    return {
-      ...displayData,
-      displayId: displayData.displayId ?? recipeQualityDisplays[quality],
-    };
   }
 
   /**
@@ -266,8 +247,7 @@ export class Items {
         .ItemEquips.Subclass.set(enchantitemsubclass)
         .ItemEquips.InvTypes.set(enchantiteminventorytype)
         .Description.enGB.set(
-          `Permanently enchant ${enchantdesc} to ${
-            spell ? desc : `Manually name this.`
+          `Permanently enchant ${enchantdesc} to ${spell ? desc : `Manually name this.`
           }`
         );
     } else {
