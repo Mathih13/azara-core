@@ -10,12 +10,7 @@ import {
   resolveProfession,
 } from "wow/wotlk/std/Profession/ProfessionType";
 import { Spell } from "wow/wotlk/std/Spell/Spell";
-import {
-  EnchantmentSlots,
-  ProfessionToolTypes,
-  RecipeProfessions,
-} from "./types";
-import { enchantmentDisplayData, professionDisplayData, professionToolDisplayData, recipeQualityDisplays } from "./displaydata";
+import { enchantmentDisplayData, EnchantmentSlots, professionDisplayData, professionToolDisplayData, ProfessionToolTypes, RecipeProfessions, recipeQualityDisplays } from "./professions";
 
 export class Items {
   /**

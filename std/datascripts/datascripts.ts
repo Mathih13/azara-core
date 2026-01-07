@@ -4,7 +4,7 @@ import { CreatureTemplateRegistry } from "./creature";
 import { EmotesRegistry } from "./emotes";
 import { GossipRegistry } from "./gossip";
 import { HolidaysRegistry } from "./holidays";
-import { ItemRegistry } from "./items";
+import { ItemRegistry } from "./items/items";
 import { PlayerRegistry } from "./player";
 import { QuestsRegistry } from "./quests";
 import { VendorsRegistry } from "./vendors";

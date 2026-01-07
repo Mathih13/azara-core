@@ -1,1 +1,0 @@
-export { ItemRegistry } from "./items";
